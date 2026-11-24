@@ -7,6 +7,7 @@ import 'package:ui/features/home/state/habitual_hand_controller.dart';
 import 'package:ui/l10n/l10n.dart';
 import 'package:ui/models/chat_startup_behavior.dart';
 import 'package:ui/models/habitual_hand.dart';
+import 'package:ui/services/agent_runtime_service.dart';
 import 'package:ui/services/assists_core_service.dart';
 import 'package:ui/services/conversation_service.dart';
 import 'package:ui/services/hide_from_recents_service.dart';
@@ -35,6 +36,8 @@ class _ExperienceMiscSettingPageState
   bool _useIndependentChatSendButton = true;
   bool _recentConversationsOnlyEnabled = false;
   ChatStartupBehavior _chatStartupBehavior = ChatStartupBehavior.resumeLast;
+  List<AcpAgentProfile> _startupAgents = const <AcpAgentProfile>[];
+  String _startupAgentId = '';
 
   @override
   void initState() {
@@ -58,9 +61,27 @@ class _ExperienceMiscSettingPageState
     _recentConversationsOnlyEnabled =
         ConversationService.isRecentConversationsOnlyEnabled();
     _chatStartupBehavior = StorageService.getChatStartupBehavior();
+    _startupAgentId = StorageService.getChatStartupAgentId();
     _loadHideFromRecentsState();
     _loadVibrationState();
     _loadRuntimeTaskState();
+    _loadStartupAgents();
+  }
+
+  Future<void> _loadStartupAgents() async {
+    try {
+      final catalog = await AgentRuntimeService.listAgents();
+      if (!mounted) return;
+      setState(() {
+        _startupAgents = catalog.agents;
+        if (_startupAgentId.isNotEmpty &&
+            _startupAgents.every((agent) => agent.id != _startupAgentId)) {
+          _startupAgentId = '';
+        }
+      });
+    } catch (e) {
+      debugPrint('Error loading startup agents: $e');
+    }
   }
 
   Future<void> _loadHideFromRecentsState() async {
@@ -226,6 +247,26 @@ class _ExperienceMiscSettingPageState
     setState(() {
       _chatStartupBehavior = value;
     });
+    if (value == ChatStartupBehavior.specifiedAgent &&
+        _startupAgents.isEmpty) {
+      await _loadStartupAgents();
+    }
+  }
+
+  Future<void> _onStartupAgentChanged(String? value) async {
+    final agentId = value?.trim() ?? '';
+    if (agentId.isEmpty) {
+      return;
+    }
+    final saved = await StorageService.setChatStartupAgentId(agentId);
+    if (!mounted) return;
+    if (!saved) {
+      showToast(context.l10n.settingsSaveFailed, type: ToastType.error);
+      return;
+    }
+    setState(() {
+      _startupAgentId = agentId;
+    });
   }
 
   Future<void> _onHabitualHandChanged(HabitualHand? value) async {
@@ -263,6 +304,13 @@ class _ExperienceMiscSettingPageState
             subtitle: context.trLegacy('选择应用启动后打开的对话'),
             trailing: _buildStartupBehaviorDropdown(_chatStartupBehavior),
           ),
+          if (_chatStartupBehavior == ChatStartupBehavior.specifiedAgent)
+            _SettingItem(
+              icon: LucideIcons.bot,
+              title: context.trLegacy('默认进入智能体'),
+              subtitle: context.trLegacy('启动时直接打开该智能体的新对话'),
+              trailing: _buildStartupAgentDropdown(),
+            ),
           _SettingItem(
             icon: LucideIcons.history,
             title: context.l10n.settingsRecentConversationsOnlyTitle,
@@ -447,6 +495,27 @@ class _ExperienceMiscSettingPageState
           )
           .toList(),
       onChanged: _onChatStartupBehaviorChanged,
+    );
+  }
+
+  Widget _buildStartupAgentDropdown() {
+    final agents = _startupAgents;
+    final currentId = _startupAgentId.isNotEmpty
+        ? _startupAgentId
+        : (agents.isNotEmpty ? agents.first.id : '');
+    return OmniSettingsDropdown<String>(
+      value: currentId,
+      maxWidth: 164,
+      menuMinWidth: 188,
+      options: agents
+          .map(
+            (agent) => OmniSettingsOption(
+              value: agent.id,
+              label: agent.name,
+            ),
+          )
+          .toList(),
+      onChanged: _onStartupAgentChanged,
     );
   }
 }

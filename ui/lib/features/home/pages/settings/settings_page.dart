@@ -343,20 +343,6 @@ class _SettingsPageState extends State<SettingsPage> with FlClashPageLoadMixin {
     final isEnglish = Localizations.localeOf(context).languageCode != 'zh';
     return [
       _SettingSection(
-        label: isEnglish ? 'Account' : '账号',
-        isAccount: true,
-        items: [
-          _SettingItem(
-            icon: LucideIcons.userRoundCog,
-            title: isEnglish ? 'Account & AI service' : '账号与 AI 服务',
-            subtitle: isEnglish
-                ? 'Sign in, view platform quota'
-                : '注册登录、查看平台额度',
-            route: '/my/account',
-          ),
-        ],
-      ),
-      _SettingSection(
         label: context.l10n.settingsSectionModelMemory,
         items: [
           _SettingItem(

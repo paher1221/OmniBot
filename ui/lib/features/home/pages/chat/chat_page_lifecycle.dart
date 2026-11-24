@@ -230,6 +230,19 @@ mixin _ChatPageLifecycleMixin on _ChatPageStateBase {
       return _newThreadTargetForConversationMode(ConversationMode.agent);
     }
 
+    if (normalizedPreferredMode == null &&
+        StorageService.getChatStartupBehavior() ==
+            ChatStartupBehavior.specifiedAgent) {
+      final startupAgentId = StorageService.getChatStartupAgentId();
+      return ConversationThreadTarget.newConversation(
+        mode: ConversationMode.agent,
+        agentId: startupAgentId.isNotEmpty
+            ? startupAgentId
+            : _kXiaowanAcpAgentId,
+        requestKey: DateTime.now().microsecondsSinceEpoch.toString(),
+      );
+    }
+
     if (normalizedPreferredMode == null) {
       final lastVisible =
           await ConversationHistoryService.getLastVisibleThreadTarget();

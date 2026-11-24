@@ -161,6 +161,7 @@ class StorageService {
   static const String kUseIndependentChatSendButtonKey =
       'use_independent_chat_send_button';
   static const String kChatStartupBehaviorKey = 'chat_startup_behavior';
+  static const String kChatStartupAgentIdKey = 'chat_startup_agent_id';
   static const String kHabitualHandKey = 'habitual_hand';
   static const String kThemeOptionKey = 'theme_option';
   static const String kLanguageOptionKey = 'language_option';
@@ -284,6 +285,14 @@ class StorageService {
 
   static Future<bool> setChatStartupBehavior(ChatStartupBehavior behavior) {
     return setString(kChatStartupBehaviorKey, behavior.storageValue);
+  }
+
+  static String getChatStartupAgentId() {
+    return getString(kChatStartupAgentIdKey, defaultValue: '')?.trim() ?? '';
+  }
+
+  static Future<bool> setChatStartupAgentId(String agentId) {
+    return setString(kChatStartupAgentIdKey, agentId.trim());
   }
 
   static HabitualHand getHabitualHand() {

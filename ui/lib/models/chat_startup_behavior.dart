@@ -1,6 +1,7 @@
 enum ChatStartupBehavior {
   resumeLast('resume_last'),
-  newConversation('new_conversation');
+  newConversation('new_conversation'),
+  specifiedAgent('specified_agent');
 
   const ChatStartupBehavior(this.storageValue);
 
@@ -19,5 +20,6 @@ enum ChatStartupBehavior {
   String get legacyLabel => switch (this) {
     ChatStartupBehavior.resumeLast => '恢复上次关闭对话',
     ChatStartupBehavior.newConversation => '新对话',
+    ChatStartupBehavior.specifiedAgent => '进入指定智能体',
   };
 }
