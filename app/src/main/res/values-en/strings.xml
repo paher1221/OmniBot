@@ -10,10 +10,7 @@
     <string name="omni_app_name">Omnibot</string>
     <string name="quick_log_widget_title">Memory</string>
     <string name="quick_log_widget_description">Capture memories from the home screen and sync them to short-term memory</string>
-    <string name="quick_log_widget_add">Add</string>
     <string name="quick_log_widget_open">Memories</string>
-    <string name="quick_log_widget_edit">Edit</string>
-    <string name="quick_log_widget_delete">Delete</string>
     <string name="quick_log_widget_empty_hint">No memories yet. Tap + to write one.</string>
     <string name="quick_log_add_task">Write memory</string>
     <string name="quick_log_edit_task">Edit memory</string>
@@ -28,12 +25,9 @@
     <string name="quick_log_font_large">Large</string>
     <string name="quick_log_entry_title">Write memory</string>
     <string name="quick_log_entry_subtitle">Write what you want to remember. Omnibot will sync it to short-term memory.</string>
-    <string name="quick_log_entry_edit_title">Edit memory</string>
-    <string name="quick_log_entry_edit_subtitle">Changes here will sync back into short memories.</string>
     <string name="quick_log_entry_hint">Write what you want to remember</string>
     <string name="quick_log_cancel">Cancel</string>
     <string name="quick_log_save">Save</string>
-    <string name="quick_log_update">Update</string>
     <string name="quick_log_delete">Delete</string>
     <string name="quick_log_content_required">Write something to remember first</string>
     <string name="quick_log_save_success">Memory saved</string>
@@ -45,9 +39,6 @@
     <string name="quick_log_not_found">This memory no longer exists.</string>
     <!-- App Update -->
     <string name="update_no_version_available">No new version available to install.</string>
-    <string name="update_cloud_service_policy_invalid">Cloud service version policy is invalid, please try again later</string>
-    <string name="update_cloud_service_check_failed">Unable to verify cloud service minimum version, please connect to the network and check for updates</string>
-    <string name="update_version_too_old">Current version is too old, please upgrade to v%s or higher to use account and official cloud services</string>
     <!-- Permissions -->
     <string name="permission_accessibility">Accessibility</string>
     <string name="permission_overlay">Overlay</string>

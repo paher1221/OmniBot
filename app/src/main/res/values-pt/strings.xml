@@ -10,10 +10,7 @@
     <string name="omni_app_name">Omnibot</string>
     <string name="quick_log_widget_title">Memória</string>
     <string name="quick_log_widget_description">Registre memórias na tela inicial e sincronize com a memória de curto prazo</string>
-    <string name="quick_log_widget_add">Adicionar</string>
     <string name="quick_log_widget_open">Memórias</string>
-    <string name="quick_log_widget_edit">Editar</string>
-    <string name="quick_log_widget_delete">Excluir</string>
     <string name="quick_log_widget_empty_hint">Nenhuma memória ainda. Toque em + para criar.</string>
     <string name="quick_log_add_task">Registrar memória</string>
     <string name="quick_log_edit_task">Editar memória</string>
@@ -28,12 +25,9 @@
     <string name="quick_log_font_large">Grande</string>
     <string name="quick_log_entry_title">Registrar memória</string>
     <string name="quick_log_entry_subtitle">Escreva o que deseja lembrar. O Omnibot sincronizará com a memória de curto prazo.</string>
-    <string name="quick_log_entry_edit_title">Editar memória</string>
-    <string name="quick_log_entry_edit_subtitle">As alterações feitas aqui serão sincronizadas com as memórias de curto prazo.</string>
     <string name="quick_log_entry_hint">Escreva o que deseja lembrar</string>
     <string name="quick_log_cancel">Cancelar</string>
     <string name="quick_log_save">Salvar</string>
-    <string name="quick_log_update">Atualizar</string>
     <string name="quick_log_delete">Excluir</string>
     <string name="quick_log_content_required">Escreva algo para lembrar primeiro</string>
     <string name="quick_log_save_success">Memória salva</string>
@@ -45,9 +39,6 @@
     <string name="quick_log_not_found">Esta memória não existe mais.</string>
     <!-- App Update -->
     <string name="update_no_version_available">Nenhuma nova versão disponível para instalar.</string>
-    <string name="update_cloud_service_policy_invalid">A política de versão do serviço em nuvem é inválida. Tente novamente mais tarde</string>
-    <string name="update_cloud_service_check_failed">Não foi possível verificar a versão mínima do serviço em nuvem. Conecte-se à internet e busque atualizações</string>
-    <string name="update_version_too_old">A versão atual é muito antiga. Atualize para v%s ou superior para usar a conta e os serviços oficiais em nuvem</string>
     <!-- Permissions -->
     <string name="permission_accessibility">Acessibilidade</string>
     <string name="permission_overlay">Sobreposição</string>
