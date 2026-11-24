@@ -91,12 +91,6 @@ const List<_EnvironmentDefinition> _environmentDefinitions =
         groupKey: 'alpineAiAgent',
       ),
       _EnvironmentDefinition(
-        id: 'claude_code',
-        title: 'Claude Code',
-        descriptionKey: 'alpineClaudeCode',
-        groupKey: 'alpineAiAgent',
-      ),
-      _EnvironmentDefinition(
         id: 'opencode',
         title: 'OpenCode',
         descriptionKey: 'alpineOpenCode',
@@ -106,12 +100,6 @@ const List<_EnvironmentDefinition> _environmentDefinitions =
         id: 'pi',
         title: 'Pi',
         descriptionKey: 'alpinePi',
-        groupKey: 'alpineAiAgent',
-      ),
-      _EnvironmentDefinition(
-        id: 'kimi',
-        title: 'Kimi Code',
-        descriptionKey: 'alpineKimiCode',
         groupKey: 'alpineAiAgent',
       ),
       _EnvironmentDefinition(
