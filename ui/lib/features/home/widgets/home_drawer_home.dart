@@ -42,6 +42,17 @@ extension _HomeDrawerHome on HomeDrawerState {
       }
       setState(() {
         _homeAgentCatalog = catalog;
+        // Apply the configured startup agent once, on the first catalog load.
+        if (_pendingHomeStartupAgentId != null) {
+          final startupFilter = _homeFilters
+              .where((filter) => filter.agentId == _pendingHomeStartupAgentId)
+              .firstOrNull;
+          _pendingHomeStartupAgentId = null;
+          if (startupFilter != null) {
+            _homeFilter = startupFilter;
+            return;
+          }
+        }
         final filters = _homeFilters;
         // Preserve the explicit filter owner across catalog refreshes. A stale
         // selection returns to Xiaowan, never whichever Agent probes first.

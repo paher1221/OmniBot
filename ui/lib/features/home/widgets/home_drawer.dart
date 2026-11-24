@@ -229,6 +229,7 @@ class HomeDrawerState extends ConsumerState<HomeDrawer>
   int _webQuickActionsRequest = 0;
   _HomeConversationFilter _homeFilter = _HomeConversationFilter.xiaowan;
   AcpAgentCatalog? _homeAgentCatalog;
+  String? _pendingHomeStartupAgentId;
   bool _homeRouteWasCurrent = false;
   AppLifecycleListener? _homeAppLifecycleListener;
   int _homeCatalogRequest = 0;
@@ -264,6 +265,13 @@ class HomeDrawerState extends ConsumerState<HomeDrawer>
     if (widget.homePage) {
       unawaited(AppUpdateService.initialize());
       unawaited(_syncPetOverlayState());
+      if (StorageService.getChatStartupBehavior() ==
+          ChatStartupBehavior.specifiedAgent) {
+        final configuredAgentId = StorageService.getChatStartupAgentId();
+        if (configuredAgentId.isNotEmpty) {
+          _pendingHomeStartupAgentId = configuredAgentId;
+        }
+      }
       _homeAppLifecycleListener = AppLifecycleListener(
         onResume: () {
           unawaited(AppUpdateService.refreshIfNeeded());
