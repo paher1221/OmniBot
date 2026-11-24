@@ -24,6 +24,7 @@ import 'package:ui/features/home/widgets/home_search_header.dart';
 import 'package:ui/l10n/l10n.dart';
 import 'package:ui/l10n/legacy_text_localizer.dart';
 import 'package:ui/models/chat_message_model.dart';
+import 'package:ui/models/chat_startup_behavior.dart';
 import 'package:ui/models/conversation_model.dart';
 import 'package:ui/models/conversation_thread_target.dart';
 import 'package:ui/models/scheduled_task.dart';
