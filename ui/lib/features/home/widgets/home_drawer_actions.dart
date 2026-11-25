@@ -74,21 +74,11 @@ extension _HomeDrawerActions on HomeDrawerState {
     final newMode = requestedMode == ConversationMode.subagent
         ? ConversationMode.agent
         : requestedMode;
-    var startupAgentId = _homeFilter.agentId ?? 'xiaowan-acp';
-    if (widget.homePage &&
-        newMode == ConversationMode.agent &&
-        StorageService.getChatStartupBehavior() ==
-            ChatStartupBehavior.specifiedAgent) {
-      final configuredAgentId = StorageService.getChatStartupAgentId();
-      if (configuredAgentId.isNotEmpty) {
-        startupAgentId = configuredAgentId;
-      }
-    }
     _openThreadTarget(
       ConversationThreadTarget.newConversation(
         mode: newMode,
         agentId: widget.homePage && newMode == ConversationMode.agent
-            ? startupAgentId
+            ? _homeFilter.agentId ?? 'xiaowan-acp'
             : null,
         requestKey: DateTime.now().microsecondsSinceEpoch.toString(),
       ),
